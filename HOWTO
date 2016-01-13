@@ -1,4 +1,4 @@
-1. Build ipaugenblick (build_dev.sh)
+afd1. Build ipaugenblick (build_dev.sh)
 2. Customize /etc/ipaugenblick/dpdk_ipstack_config.txt. The format is:
 <port number> <ip address> <mask>
 Note: it is possible to have several ip addresses on one port, just provide the same port number
