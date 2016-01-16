@@ -562,6 +562,8 @@ int dpdk_linux_tcpip_init(int argc,char **argv)
 
         nb_ports_available = nb_ports;
 
+	ipaugenblick_log(IPAUGENBLICK_LOG_DEBUG,"Available ports %d\n", nb_ports_available);
+
 	/* Initialise each port */
 	for (portid = 0; portid < nb_ports; portid++) {
 		/* skip ports that are not enabled */
