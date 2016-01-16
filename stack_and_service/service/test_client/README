@@ -1,0 +1,4 @@
+# support there is only one port bound to DPDK, and the ether driver is e1000, then run it as: 
+/usr/bin/ipaugenblick_srv -c 1 -n 4 --proc-type=primary -d librte_pmd_e1000.so -- -p 1 -l 0
+./ipaugenblick_main_tcp_listener_with_select.bin  -c 4 -n 4 --proc-type=secondary -- -p 1  --port2bind 7777
+
