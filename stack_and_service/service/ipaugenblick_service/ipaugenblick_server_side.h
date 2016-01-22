@@ -192,7 +192,7 @@ static inline struct ipaugenblick_memory *ipaugenblick_service_api_init(int comm
             ipaugenblick_log(IPAUGENBLICK_LOG_ERR,"cannot create ring %s %d\n",__FILE__,__LINE__);
             exit(0);
         }
-        ipaugenblick_log(IPAUGENBLICK_LOG_INFO,"SELECTOR READY RING#%d CREATED\n",ringset_idx);
+        //ipaugenblick_log(IPAUGENBLICK_LOG_INFO,"SELECTOR READY RING#%d CREATED\n",ringset_idx);
         rte_ring_enqueue(selectors_ring,(void*)ringset_idx);
     } 
     ipaugenblick_log(IPAUGENBLICK_LOG_INFO,"DONE\n");

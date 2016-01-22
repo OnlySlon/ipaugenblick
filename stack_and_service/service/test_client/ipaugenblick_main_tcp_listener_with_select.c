@@ -14,7 +14,7 @@
 
 #define USE_TX 1
 #define USE_RX 1
-#define LISTENERS_COUNT 8
+#define LISTENERS_COUNT 1
 #define LISTENERS_BASE 7777
 
 static inline int is_listener(int sock, int *listeners)
@@ -38,7 +38,6 @@ int main(int argc,char **argv)
     int ready_socket_count;
     int i,tx_space = 0;
     int max_total_length = 0;
-    unsigned short mask;
     unsigned long received_count = 0;
     unsigned long transmitted_count = 0;
     struct timeval tm_out, *p_timeout = NULL;
@@ -47,6 +46,7 @@ int main(int argc,char **argv)
     int port_to_bind;
     struct sockaddr addr;
     int usebulk = 0;
+    unsigned int dest_ip,mask,next_hop;
     struct sockaddr_in *in_addr = (struct sockaddr_in *)&addr;
 
    // ipaugenblick_set_log_level(0/*IPAUGENBLICK_LOG_DEBUG*/);
@@ -62,7 +62,7 @@ int main(int argc,char **argv)
         };
     int opt_idx,c;
 
-    strcpy(my_ip_addr,"192.168.150.63");
+    strcpy(my_ip_addr,"0.0.0.0");
     port_to_bind = LISTENERS_BASE;
 
     ipaugenblick_fdzero(&readfdset);
@@ -97,6 +97,16 @@ int main(int argc,char **argv)
                 printf("undefined option %c\n",c);
         }
     }
+
+    dest_ip = inet_addr("0.0.0.0");
+    mask = inet_addr("0.0.0.0");
+    next_hop = inet_addr(your_gw_ip); /* replace with your real gw IP */
+
+    printf("add %x/%x nh %x\n",dest_ip,mask,next_hop);
+    if(ipaugenblick_add_v4_route(dest_ip,mask,next_hop, 1)) {
+        printf("cannot add route %s %d\n",__FILE__,__LINE__);
+    }
+
     selector = ipaugenblick_open_select();
     if(selector != -1) {
         printf("selector opened\n");
@@ -179,6 +189,7 @@ int main(int argc,char **argv)
             	    }
 		}
         }
+#if 0
         for (sock = 0; sock < writefdset.returned_idx; sock++) {
 	    if (!ipaugenblick_fdisset(ipaugenblick_fd_idx2sock(&writefdset,sock),&writefdset))
 			continue;
@@ -233,6 +244,7 @@ int main(int argc,char **argv)
 		}
 	    }
         }  
+#endif
     }
     return 0;
 }
