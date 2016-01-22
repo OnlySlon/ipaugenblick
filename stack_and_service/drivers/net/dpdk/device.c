@@ -44,6 +44,8 @@
 
 #include <ipaugenblick_log.h>
 
+extern int dump_pkt_src;
+
 typedef struct
 {
 	int port_number;

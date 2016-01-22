@@ -6,8 +6,6 @@
 #include <netinet/in.h>
 #define IPAUGENBLICK_MAX_SOCKETS 2048
 
-extern int dump_pkt_src;
-
 /*
 * STRUCTURE:
 *    data_and_descriptor
