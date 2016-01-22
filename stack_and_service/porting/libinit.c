@@ -195,19 +195,21 @@ static int parse_portmask(const char *portmask)
 }
 #define DUMP(varname) printf("%s = %x\n", #varname, varname);
 /* Parse the argument given in the command line of the application */
+int dump_pkt_src=0;
 static int parse_args(int argc, char **argv)
 {
-	int opt, ret;
+	int opt, ret, base = 10;
 	char **argvopt;
+	char* endptr;
 	int option_index;
 	char *prgname = argv[0];
 	static struct option lgopts[] = {
-		{NULL, 0, 0, 0}
+		{0,NULL, 0, 0, 0}
 	};
 DUMP(argc);
 	argvopt = argv;
 
-	while ((opt = getopt_long(argc, argvopt, "p:a:Tl:",
+	while ((opt = getopt_long(argc, argvopt, "d:p:a:Tl:",
 				  lgopts, &option_index)) != EOF) {
 
 		switch (opt) {
@@ -233,6 +235,9 @@ DUMP(argc);
 		case 'l':
 			ipaugenblick_set_log_level(atoi(optarg));
 			break;
+		case 'd':
+			dump_pkt_src = inet_addr(optarg);
+		        break;
 		default:
 			//l2fwd_usage(prgname);
 			return -1;

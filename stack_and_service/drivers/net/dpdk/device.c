@@ -149,6 +149,9 @@ static void rx_construct_skb_and_submit(struct net_device *netdev)
 			rte_pktmbuf_free(mbufs[i]);
 			continue;
 		}
+
+		if(dump_pkt_src) dump_rtx(mbufs[i]);
+
 		skb->len = rte_pktmbuf_data_len(mbufs[i]);
 #if 0 /* once the receive will scatter the packets, this will be needed */
 		m = mbufs[i]->pkt.next;

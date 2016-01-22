@@ -2,3 +2,6 @@
 /usr/bin/ipaugenblick_srv -c 1 -n 4 --proc-type=primary -d librte_pmd_e1000.so -- -p 1 -l 0
 ./ipaugenblick_main_tcp_listener_with_select.bin  -c 4 -n 4 --proc-type=secondary -- -p 1  --port2bind 7777
 
+# to run on virtual machine or cloud, run it like this with debug traffic of src 47.88.137.253
+/usr/bin/ipaugenblick_srv -c 1 -n 4 --proc-type=primary -d librte_pmd_virtio.so -- -p 1 -l 0 -d 47.88.137.253
+

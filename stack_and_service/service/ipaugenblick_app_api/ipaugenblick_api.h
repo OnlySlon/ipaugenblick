@@ -6,6 +6,8 @@
 #include <netinet/in.h>
 #define IPAUGENBLICK_MAX_SOCKETS 2048
 
+extern int dump_pkt_src;
+
 /*
 * STRUCTURE:
 *    data_and_descriptor
@@ -560,5 +562,7 @@ extern void *ipaugenblick_mem_get(int size);
 extern void ipaugenblick_mem_free(void *obj);
 
 extern void ipaugenblick_set_selector_mode(int select, int mode);
+
+extern void dump_rtx(struct rte_mbuf* m);
 
 #endif
