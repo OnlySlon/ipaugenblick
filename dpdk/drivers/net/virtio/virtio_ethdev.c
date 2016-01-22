@@ -1438,7 +1438,7 @@ static struct eth_driver rte_virtio_pmd = {
 	.pci_drv = {
 		.name = "rte_virtio_pmd",
 		.id_table = pci_id_virtio_map,
-		.drv_flags = RTE_PCI_DRV_DETACHABLE,
+		.drv_flags = RTE_PCI_DRV_NEED_MAPPING | RTE_PCI_DRV_DETACHABLE,
 	},
 	.eth_dev_init = eth_virtio_dev_init,
 	.eth_dev_uninit = eth_virtio_dev_uninit,
